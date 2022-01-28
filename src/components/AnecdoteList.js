@@ -23,6 +23,8 @@ const Anecdote = ({ anecdote, handleClick }) => {
 const AnecdoteList = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
+    const filter = useSelector(state => state.filter)
+    const filteredAnecdotes = anecdotes.filter(a => a.content.includes(filter))
 
     const voteButtonClicked = (anecdote) => {
         dispatch(incrementVote(anecdote.id))
@@ -36,7 +38,7 @@ const AnecdoteList = () => {
 
     return (
         <ul>
-            {anecdotes.map(anecdote =>
+            {filteredAnecdotes.map(anecdote =>
                 <Anecdote
                     key={anecdote.id}
                     anecdote={anecdote}

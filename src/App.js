@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import AnecdoteList from './components/AnecdoteList'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
+import Filter from './components/Filter'
 
 const App = () => {
   const anecdotes = useSelector(state => state.anecdotes)
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <div>
       <Notification />
+      <Filter />
       <AnecdoteList />
       <AnecdoteForm />
     </div>
