@@ -10,7 +10,7 @@ const anecdoteReducer = (state = [], action) => {
       const anecdoteToChange = state.find(a => a.id === id)
       const changedAnecdote = {
         ...anecdoteToChange,
-        votes: anecdoteToChange.votes + 1
+        votes: action.data.votes
       }
       return state.map(a => a.id !== id ? a : changedAnecdote)
 
@@ -26,10 +26,19 @@ const anecdoteReducer = (state = [], action) => {
 
 }
 
-export const incrementVote = (id) => {
-  return {
-    type: 'INCREMENT_VOTE',
-    data: { id }
+export const incrementVote = (anecdote) => {
+  const newAnecdote = {
+    id: anecdote.id,
+    votes: anecdote.votes + 1,
+    content: anecdote.content
+  }
+  return async dispatch => {
+    const response = await anecdoteService.update(newAnecdote)
+    console.log('response :>> ', response)
+    dispatch({
+      type: 'INCREMENT_VOTE',
+      data: response
+    })
   }
 }
 

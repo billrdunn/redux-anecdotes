@@ -33,7 +33,7 @@ const AnecdoteList = () => {
     })
 
     const voteButtonClicked = (anecdote) => {
-        dispatch(incrementVote(anecdote.id))
+        dispatch(incrementVote(anecdote))
         dispatch(updateNotification(`${anecdote.content} liked`))
         setTimeout(() => {
             dispatch(hideNotification())
