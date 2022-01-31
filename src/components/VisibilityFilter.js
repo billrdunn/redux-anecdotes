@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { editFilter } from '../reducers/filterReducer'
 
-const Filter = () => {
+const VisibilityFilter = () => {
     const dispatch = useDispatch()
     const handleChange = (event) => {
         dispatch(editFilter(event.target.value))
@@ -18,4 +18,4 @@ const Filter = () => {
     )
 }
 
-export default Filter
+export default VisibilityFilter

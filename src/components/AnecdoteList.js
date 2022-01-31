@@ -24,7 +24,11 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
     const filter = useSelector(state => state.filter)
-    const filteredAnecdotes = anecdotes.filter(a => a.content.includes(filter))
+    const filteredAnecdotes = anecdotes.filter((a) => {
+        return (
+            a.content.includes(filter)
+        )
+    })
 
     const voteButtonClicked = (anecdote) => {
         dispatch(incrementVote(anecdote.id))
@@ -33,7 +37,7 @@ const AnecdoteList = () => {
             dispatch(hideNotification())
         }, 5000)
         dispatch(showNotification())
-    
+
     }
 
     return (
