@@ -2,9 +2,6 @@ const initialState = {text: '', isVisible: false}
 
 
 const notificationReducer = (state = initialState, action) => {
-    console.log('NR state now: ', state)
-    console.log('NR action', action)
-
     switch (action.type) {
         case 'UPDATE_TEXT':
             const updatedText = {
@@ -32,22 +29,20 @@ const notificationReducer = (state = initialState, action) => {
     }
 }
 
-export const updateNotification = (notification) => {
-    return {
-        type: 'UPDATE_TEXT',
-        data: notification
-    }
-}
-
-export const showNotification = () => {
-    return {
-        type: 'SHOW',
-    }
-}
-
-export const hideNotification = () => {
-    return {
-        type: 'HIDE',
+export const updateNotification = (text, timeout) => {
+    return async dispatch => {
+        dispatch({
+            type: 'UPDATE_TEXT',
+            data: text
+        })
+        dispatch({
+            type: 'SHOW'
+        })
+        setTimeout(() => {
+            dispatch({
+                type: 'HIDE'
+            })
+        }, timeout * 1000)
     }
 }
 

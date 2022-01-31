@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { incrementVote } from '../reducers/anecdoteReducer'
-import { hideNotification, showNotification, updateNotification } from '../reducers/notificationReducer'
+import { updateNotification } from '../reducers/notificationReducer'
 
 
 const Anecdote = ({ anecdote, handleClick }) => {
@@ -23,10 +23,8 @@ const Anecdote = ({ anecdote, handleClick }) => {
 const AnecdoteList = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
-    console.log('anecdotes :>> ', anecdotes)
     const filter = useSelector(state => state.filter)
     const filteredAnecdotes = anecdotes.filter((a) => {
-        console.log('a.content :>> ', a.content)
         return (
             a.content.includes(filter)
         )
@@ -34,12 +32,7 @@ const AnecdoteList = () => {
 
     const voteButtonClicked = (anecdote) => {
         dispatch(incrementVote(anecdote))
-        dispatch(updateNotification(`${anecdote.content} liked`))
-        setTimeout(() => {
-            dispatch(hideNotification())
-        }, 5000)
-        dispatch(showNotification())
-
+        dispatch(updateNotification(`${anecdote.content} liked`, 3))
     }
 
     return (
