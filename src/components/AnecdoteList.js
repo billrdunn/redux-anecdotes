@@ -23,8 +23,10 @@ const Anecdote = ({ anecdote, handleClick }) => {
 const AnecdoteList = () => {
     const dispatch = useDispatch()
     const anecdotes = useSelector(state => state.anecdotes)
+    console.log('anecdotes :>> ', anecdotes)
     const filter = useSelector(state => state.filter)
     const filteredAnecdotes = anecdotes.filter((a) => {
+        console.log('a.content :>> ', a.content)
         return (
             a.content.includes(filter)
         )

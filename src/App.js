@@ -4,17 +4,14 @@ import AnecdoteList from './components/AnecdoteList'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import VisibilityFilter from './components/VisibilityFilter'
-import anecdoteService from './services/anecdotes'
+
 import { initialiseAnecdotes } from './reducers/anecdoteReducer'
 
 const App = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    (async () => {
-      const all = await anecdoteService.getAll()
-      dispatch(initialiseAnecdotes(all))
-    })()
+    dispatch(initialiseAnecdotes())
   }, [dispatch])
 
   const anecdotes = useSelector(state => state.anecdotes)
