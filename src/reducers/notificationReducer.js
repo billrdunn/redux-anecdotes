@@ -1,5 +1,6 @@
 const initialState = {text: '', isVisible: false}
 
+let timeoutId = 0;
 
 const notificationReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -31,6 +32,7 @@ const notificationReducer = (state = initialState, action) => {
 
 export const updateNotification = (text, timeout) => {
     return async dispatch => {
+        clearTimeout(timeoutId)
         dispatch({
             type: 'UPDATE_TEXT',
             data: text
@@ -38,7 +40,7 @@ export const updateNotification = (text, timeout) => {
         dispatch({
             type: 'SHOW'
         })
-        setTimeout(() => {
+        timeoutId = setTimeout(() => {
             dispatch({
                 type: 'HIDE'
             })
